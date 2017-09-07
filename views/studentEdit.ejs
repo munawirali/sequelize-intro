@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title><%=title %></title>
+  </head>
+  <body>
+    <h1>Data Students</h1>
+    <a href="/students">Back to Students</a>
+    <%if (pesanError!=''){%>
+      <h4><%=pesanError%></h4>
+    <%}%><br>
+    <form class="" action="/students/edit/<%=data.id%>" method="post">
+      <input type="text" name="first_name" value="<%=data.first_name%>" placeholder="First Name">
+      <input type="text" name="last_name" value="<%=data.last_name%>" placeholder="Last Name">
+      <input type="text" name="email" value="<%=data.email%>" placeholder="Email">
+      <input type="submit" value="EDIT STUDENT">
+    </form>
+  </body>
+</html>

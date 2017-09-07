@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title><%=title %></title>
+  </head>
+  <body>
+    <h1>Add Data Students</h1>
+    <a href="/students/">Back to Students</a><br>
+    <%if (pesanError!=''){%>
+      <h4><%=pesanError%></h4>
+    <%}%><br>
+    <table>
+    <form class="" action="/students/add" method="post">
+      <input type="text" name="first_name" placeholder="First Name">
+      <input type="text" name="last_name" placeholder="Last Name">
+      <!-- <input type="email" name="email" placeholder="Email"> -->
+      <input type="text" name="email" placeholder="Email">
+      <input type="submit" value="ADD STUDENT">
+    </form>
+  </body>
+</html>
