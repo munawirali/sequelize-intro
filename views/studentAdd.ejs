@@ -3,20 +3,23 @@
   <head>
     <meta charset="utf-8">
     <title><%=title %></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   </head>
   <body>
-    <h1>Add Data Students</h1>
+    <h1>Add Data Students</h1><br>
     <a href="/students/">Back to Students</a><br>
     <%if (pesanError!=''){%>
       <h4><%=pesanError%></h4>
-    <%}%><br>
+    <%}%>
     <table>
-    <form class="" action="/students/add" method="post">
-      <input type="text" name="first_name" placeholder="First Name">
-      <input type="text" name="last_name" placeholder="Last Name">
-      <!-- <input type="email" name="email" placeholder="Email"> -->
-      <input type="text" name="email" placeholder="Email">
-      <input type="submit" value="ADD STUDENT">
+    <form class="form-control" action="/students/add" method="post">
+      First Name : <br>
+      <input type="text" name="first_name" placeholder="First Name" value="<%=data.first_name%>"><br>
+      Last Name : <br>
+      <input type="text" name="last_name" placeholder="Last Name" value="<%=data.last_name%>"><br>
+      Email : <br>
+      <input type="text" name="email" placeholder="Email" value="<%=data.email%>"><br><br>
+      <button class="btn btn-primary" type="submit">Add Data</button>
     </form>
   </body>
 </html>

@@ -1,0 +1,28 @@
+{
+  "name": "sequelize-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/munawirali/sequelize-project.git"
+  },
+  "author": "munawirali",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/munawirali/sequelize-project/issues"
+  },
+  "homepage": "https://github.com/munawirali/sequelize-project#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "bootstrap": "^3.3.7",
+    "ejs": "^2.5.7",
+    "express": "^4.15.4",
+    "pg": "^7.3.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.8.0"
+  }
+}

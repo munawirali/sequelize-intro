@@ -3,12 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title><%=title %></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   </head>
   <body>
     <h1>Data Students</h1>
     <a href="/">Back to Home</a><br>
-    <a href="/students/add"><input type="submit" name="" value="Tambah Data"></a>
-    <table>
+    <a href="/students/add"><button class="btn btn-primary">Add Students</button></a>
+    <table class="table table-bordered table-striped table-hover">
       <thead>
         <tr>
           <th>Id</th>
@@ -16,6 +17,7 @@
           <th>Last Name</th>
           <th>Email</th>
           <th>Actions</th>
+          <th>Options</th>
         </tr>
       </thead>
       <tbody>
@@ -25,13 +27,11 @@
             <td><%=row.first_name%></td>
             <td><%=row.last_name%></td>
             <td><%=row.email%></td>
+            <td><a href="/students/<%=row.id%>/addsubject">Add Subject</a></td>
             <td>
-              <!-- <script type="text/javascript">
-                confDelete()=>{
-                  return confirm('Anda yakin menghapus data ini?');
-                } -->
               </script>
               <a href="/students/edit/<%=row.id%>">Edit</a>
+              <a>|</a>
               <a onclick="javascript:return confirm('Anda yakin akan menghapus data ini?')" href="/students/delete/<%=row.id%>">Delete</a>
             </td>
           </tr>

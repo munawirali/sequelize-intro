@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title><%=title%></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  </head>
+  <body>
+    <h1>Add Scores</h1>
+    <a href="/subjects/<%=data[0].SubjectId%>/enrolledstudents">Back to enrolledstudents</a><br><br>
+    <form class="" action="/subjects/<%=data[0].id%>/givescore" method="post">
+      Nama : <%=data[0].Student.first_name%> <%=data[0].Student.last_name%> <br>
+      Subject : <%=data[0].Subject.subject_name%><br>
+      Score : <input type="text" name="score"><br><br>
+      <!-- <input type="submit" value="Save"> -->
+      <button class="btn btn-primary" type="submit">Save</button>
+    </form>
+  </body>
+</html>

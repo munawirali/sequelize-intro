@@ -2,6 +2,7 @@
 module.exports = function(sequelize, DataTypes) {
   var Subject = sequelize.define('Subject', {
     subject_name: DataTypes.STRING
+    // TeacherId:DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {
@@ -9,5 +10,9 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
+  Subject.associate=function (models){
+    Subject.hasMany(models.Teacher);
+    Subject.hasMany(models.ConjStudentSubject);
+  }
   return Subject;
 };

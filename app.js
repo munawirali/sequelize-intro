@@ -1,13 +1,14 @@
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
+
 const index=require('./routes/index');
 const teachers=require('./routes/teachers');
 const subjects=require('./routes/subjects');
 const students=require('./routes/students');
 
 app.set(`view engine`,`ejs`);
-app.use(bodyParser.urlencoded({extender:true}));
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
 app.use('/',index);
