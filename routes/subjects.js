@@ -1,6 +1,7 @@
 const express = require('express');
 const router=express.Router();
 const model = require('../models');
+const scoreLeter=require('../helper/scoreLeter');
 
 router.get('/',(req,res)=>{
   model.Subject.findAll({
@@ -9,22 +10,33 @@ router.get('/',(req,res)=>{
   })
   .then(rows=>{
     // res.send(rows);
-    res.render('subjects',{data:rows,title:`School Applications : Data Subjects`});
+    res.render('subjects',{data:rows,title:`School Applications : View Data Subjects`});
   })
   .catch(err=>{
     res.send(err);
   })
 })
-// /subjects/1/enrolledstudents
-// where: {
-//   id: `${req.params.id}`
-// },
-// include: [
-//   {model: models.Conjunction,
-//     include: [{model: models.Student}],
-//   }
-// ],
-// order: [[models.Conjunction, models.Student, 'first_name']]
+// router.get('/:id/enrolledstudents',(req,res)=>{
+//   model.Subject.findAll({
+//     where:{
+//       id:req.params.id
+//     },
+//     include:[{
+//       model:model.ConjStudentSubject,
+//       include:[{
+//         model:model.Students
+//       }]
+//     }],
+//     order:[[model.ConjStudentSubject,model.Students,'first_name','ASC']]
+//   })
+//   .then(rows=>{
+//     // res.send(rows[0]);
+//     res.render('enrolledStudents',{data:rows,title:`School Applications : Enroll Students to Subjects`})
+//
+//   })
+//   .catch(err=>{
+//     res.send(err);
+//   })
 // })
 router.get('/:id/enrolledstudents',(req,res)=>{
   model.Subject.findAll({
@@ -32,45 +44,72 @@ router.get('/:id/enrolledstudents',(req,res)=>{
       id:req.params.id
     },
     include:[{
-      model:model.ConjStudentSubject,
-      include:[{
-        model:model.Students
-      }]
-    }],
-    order:[[model.ConjStudentSubject,model.Students,'first_name','ASC']]
+      model:model.Students}]
+    // order:[[model.ConjStudentSubject,model.Students,'first_name','ASC']]
   })
   .then(rows=>{
-    // res.send(rows[0]);
-    res.render('enrolledStudents',{data:rows,title:`School Applications : Data Subjects`})
+    // res.send(rows);
+    if (rows[0].Students.length>0) {
+      let c=0;
+      rows[0].Students.map(rowStudents=>{
+        rowStudents['scoreLeter']=scoreLeter(rowStudents.SubjectStudent.score);console.log('-----'+scoreLeter(rowStudents.SubjectStudent.score));
+        console.log();
+        c++
+        if (c>=rows[0].Students.length) {
+          // res.send(rowStudents)
+          res.render('enrolledStudents',{data:rows[0],title:`School Applications : Enroll Students to Subjects`})
+        }
+      })
+    } else {res.redirect('/subjects')}
+
+    // res.render('enrolledStudents',{data:rows,title:`School Applications : Enroll Students to Subjects`})
 
   })
   .catch(err=>{
     res.send(err);
   })
 })
-router.get('/:id/givescore',(req,res)=>{
-  model.ConjStudentSubject.findAll({
+router.get('/:StudentId:SubjectId/givescore',(req,res)=>{
+  model.SubjectStudent.findAll({
     where:{
-      id:req.params.id
-    },
+      StudentId:req.params.StudentId,SubjectId:req.params.SubjectId
+  },
     include:[{model:model.Students},{model:model.Subject}],
   })
   .then(rows=>{
-    // res.send(rows);
-    res.render('subjectsGiveScore',{data:rows,title:`School Applications : Give Score`})
+    res.send(rows);
+    // res.render('subjectsGiveScore',{data:rows,title:`School Applications : Give Score`})
   })
 })
-router.post('/:id/givescore',(req,res)=>{
+router.post('/:StudentId:SubjectId/givescore',(req,res)=>{
   // res.send(req.params.id);
-  model.ConjStudentSubject.update({
+  model.SubjectStudent.update({
     score:req.body.score
   },{
     where:{
-      id:req.params.id
+      StudentId:req.params.StudentId
     }
   })
-  .then(rows=>{
-    res.redirect(`/subjects/${req.params.id}/enrolledstudents`);
+  .then(()=>{
+    // res.redirect(`/subjects/${req.params.SubjectId}/enrolledstudents`);
+    // model.Subject.findAll({
+    //   where:{
+    //     id:req.params.id
+    //   },
+    //   include:[{
+    //       model:model.Students
+    //   }],
+    //   order:[[model.SubjectStudent,model.Students,'first_name','ASC']]
+    // })
+    // .then(rows=>{
+    //   // res.send(rows[0]);
+    //   res.render('enrolledStudents',{data:rows,title:`School Applications : Data Subjects`})
+    //
+    // })
+    // .catch(err=>{
+    //   res.send(err);
+    // })
+
   })
   .catch(err=>{
     res.send(err);

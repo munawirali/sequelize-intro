@@ -33,7 +33,8 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
   Students.associate=function (models){
-    Students.hasMany(models.ConjStudentSubject);
+    // Students.hasMany(models.ConjStudentSubject);
+    Students.belongsToMany(models.Subject,{through:'SubjectStudent'})
   }
   //instance
   Students.prototype.getFullName = function () {

@@ -15,7 +15,7 @@ router.get('/',(req,res)=>{
     //       return obj;
     //     })
         // res.send(rows);
-     res.render('teachers',{data:rows,title:`School Applications : Data Teachers`});
+     res.render('teachers',{data:rows,title:`School Applications : View Data Teachers`});
   })
   .catch(err=>{
     res.send(err);

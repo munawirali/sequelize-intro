@@ -1,7 +1,6 @@
 'use strict';
-
 module.exports = function(sequelize, DataTypes) {
-  var ConjStudentSubject = sequelize.define('ConjStudentSubject', {
+  var SubjectStudent = sequelize.define('SubjectStudent', {
     StudentId: DataTypes.INTEGER,
     SubjectId: DataTypes.INTEGER,
     score: DataTypes.INTEGER
@@ -12,10 +11,9 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-
-  ConjStudentSubject.associate=function (models){
-    ConjStudentSubject.belongsTo(models.Students);
-    ConjStudentSubject.belongsTo(models.Subject);
+  SubjectStudent.associate=function(models){
+    SubjectStudent.belongsTo(models.Subject);
+    SubjectStudent.belongsTo(models.Students)
   }
-  return ConjStudentSubject;
+  return SubjectStudent;
 };

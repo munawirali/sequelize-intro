@@ -8,7 +8,7 @@ router.get('/',(req,res)=>{
   })
   .then(rows=>{
     // res.send(rows);
-    res.render('students',{data:rows,title:`School Applications : Data Students`});
+    res.render('students',{data:rows,title:`School Applications : View Data Students`});
   })
   .catch(err=>{
     res.send(err);
@@ -144,7 +144,7 @@ router.get('/:id/addsubject',(req,res)=>{
 })
 
 router.post('/:id/addsubject',(req,res)=>{
-  model.ConjStudentSubject.create({
+  model.SubjectStudent.create({
     StudentId:req.params.id,
     SubjectId:req.body.SubjectId
   })
