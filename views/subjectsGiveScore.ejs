@@ -4,11 +4,14 @@
   <body>
     <%-include partial/navigation%>
     <h1>Add Scores</h1><br>
-    <a href="/subjects/<%=data[0].SubjectId%>/enrolledstudents">Back to enrolledstudents</a><br><br>
-    <form class="" action="/subjects/<%=data[0].StudentId%><%=data[0].SubjectId%>/givescore" method="post">
-      Nama : <%=data[0].Student.getFullName()%><br>
-      Subject : <%=data[0].Subject.subject_name%><br>
-      Score : <input type="text" name="score"><br><br>
+    <a href="/subjects/<%=data[0].SubjectId%>/enrolledstudents">Return to enrolledstudents</a><br><br>
+    <form class="form-control" action="/subjects/<%=data[0].StudentId%>/<%=data[0].SubjectId%>/givescore" method="post">
+      Nama :<br>
+      <input type="text" name="" value="<%=data[0].Student.getFullName()%>" readonly><br>
+      Subject : <br>
+      <input type="text" name="" value="<%=data[0].Subject.subject_name%>" readonly><br>
+      Score : <br>
+      <input type="text" name="score"><br><br>
       <!-- <input type="submit" value="Save"> -->
       <button class="btn btn-primary" type="submit">Save</button>
     </form>

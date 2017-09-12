@@ -19,11 +19,12 @@
           <tr>
             <td><%=i++%></td>
             <td><%=row.getFullName()%></td>
-            <%if (row.score==null){%>
-              <td><a href="/subjects/<%=row.StudentId%><%=row.SubjectId%>/givescore">Give Score</a></td>
+            <%if (row.SubjectStudent.score==null){%>
+              <td><a href="/subjects/<%=row.SubjectStudent.StudentId%>/<%=row.SubjectStudent.SubjectId%>/givescore">Give Score</a></td>
             <%} else {%>
-              <td><%=row.score%></td>
+              <td><%=row.SubjectStudent.score%></td>
             <%}%>
+            <td><%=row.getDataValue('scoreLeter')%></td>
           </tr>
         <%})}%>
       </tbody>

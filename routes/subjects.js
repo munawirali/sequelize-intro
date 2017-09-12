@@ -52,11 +52,12 @@ router.get('/:id/enrolledstudents',(req,res)=>{
     if (rows[0].Students.length>0) {
       let c=0;
       rows[0].Students.map(rowStudents=>{
-        rowStudents['scoreLeter']=scoreLeter(rowStudents.SubjectStudent.score);console.log('-----'+scoreLeter(rowStudents.SubjectStudent.score));
-        console.log();
+        // console.log('score-----'+scoreLeter(rowStudents.SubjectStudent.score));
+        rowStudents.setDataValue('scoreLeter',scoreLeter(rowStudents.SubjectStudent.score));
+        // rowStudents.setDataValue('scoreLeter','jangkrik');
         c++
         if (c>=rows[0].Students.length) {
-          // res.send(rowStudents)
+          // res.send(rows[0])
           res.render('enrolledStudents',{data:rows[0],title:`School Applications : Enroll Students to Subjects`})
         }
       })
@@ -69,29 +70,33 @@ router.get('/:id/enrolledstudents',(req,res)=>{
     res.send(err);
   })
 })
-router.get('/:StudentId:SubjectId/givescore',(req,res)=>{
+router.get('/:StudentId/:SubjectId/givescore',(req,res)=>{ console.log('StudentId='+req.params.StudentId+' SubjectId='+req.params.SubjectId);
   model.SubjectStudent.findAll({
     where:{
-      StudentId:req.params.StudentId,SubjectId:req.params.SubjectId
+      StudentId:req.params.StudentId,
+      SubjectId:req.params.SubjectId
   },
     include:[{model:model.Students},{model:model.Subject}],
   })
   .then(rows=>{
-    res.send(rows);
-    // res.render('subjectsGiveScore',{data:rows,title:`School Applications : Give Score`})
+    // console.log(rows);
+    // res.send(rows);
+    res.render('subjectsGiveScore',{data:rows,title:`School Applications : Give Score`})
   })
 })
-router.post('/:StudentId:SubjectId/givescore',(req,res)=>{
+router.post('/:StudentId/:SubjectId/givescore',(req,res)=>{
   // res.send(req.params.id);
   model.SubjectStudent.update({
     score:req.body.score
   },{
     where:{
-      StudentId:req.params.StudentId
+      StudentId:req.params.StudentId,
+      SubjectId:req.params.SubjectId
     }
   })
   .then(()=>{
-    // res.redirect(`/subjects/${req.params.SubjectId}/enrolledstudents`);
+    // /subjects/<%=data[0].SubjectId%>/enrolledstudents
+    res.redirect(`/subjects/${req.params.SubjectId}/enrolledstudents`);
     // model.Subject.findAll({
     //   where:{
     //     id:req.params.id
