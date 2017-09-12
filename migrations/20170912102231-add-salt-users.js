@@ -11,11 +11,11 @@ module.exports = {
     */
     queryInterface.addColumn(
       'Users',
-      'password',
-    {
-      type: Sequelize.STRING,
-      allowNull: false
-    })
+      'salt',
+      {
+        type: Sequelize.STRING
+      }
+    )
   },
 
   down: function (queryInterface, Sequelize) {

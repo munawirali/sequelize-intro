@@ -25,7 +25,6 @@ router.get('/add',(req,res)=>{
 })
 
 router.post('/add',(req,res)=>{
-
   model.Students.create({
     first_name:`${req.body.first_name}`,
     last_name:`${req.body.last_name}`,

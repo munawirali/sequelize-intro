@@ -6,9 +6,9 @@
     <h1>Add Data Students</h1><br>
     <!-- <a href="/students/">Back to Students</a><br> -->
     <%if (pesanError!=''){%>
-      <h4><%=pesanError%></h4>
+    <h4><%=pesanError%></h4>
     <%}%>
-    <table>
+    <!-- <table> -->
     <form class="form-control" action="/students/add" method="post">
       First Name : <br>
       <input type="text" name="first_name" placeholder="First Name" value="<%=data.first_name%>"><br>

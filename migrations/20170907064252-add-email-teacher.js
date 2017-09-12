@@ -12,11 +12,11 @@ module.exports = {
     queryInterface.addColumn(
       'Teachers',
       'email',
-    {
-      type: Sequelize.STRING,
-      allowNull: false
-    }
-)
+      {
+        type: Sequelize.STRING,
+        allowNull: false
+      }
+    )
   },
 
   down: function (queryInterface, Sequelize) {

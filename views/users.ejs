@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <%-include partial/header%>
+  <body>
+    <%- include partial/navigation%>
+    <h1>Data Users</h1>
+    <!-- <a href="/students/add"><button class="btn btn-primary">Add Students</button></a> -->
+    <table class="table table-bordered table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Username</th>
+          <th>Role</th>
+          <th>Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%if (data){data.forEach(row=>{%>
+          <tr>
+            <td><%=row.id%></td>
+            <td><%=row.username%></td>
+            <td><%=row.role%></td>
+            <td>
+              </script>
+              <a href="/users/edit/<%=row.id%>">Edit</a>
+              <a>|</a>
+              <a onclick="javascript:return confirm('Anda yakin akan menghapus data ini?')" href="/users/delete/<%=row.id%>">Delete</a>
+            </td>
+          </tr>
+        <%})}%>
+      </tbody>
+    </table>
+  </body>
+</html>

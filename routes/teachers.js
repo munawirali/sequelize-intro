@@ -40,7 +40,7 @@ router.post('/add',(req,res)=>{
     SubjectId:req.body.SubjectId
   })
   .then(()=>{
-    req.redirect('/teachers');
+    res.redirect('/teachers');
   })
   .catch(err=>{
     res.send(err);

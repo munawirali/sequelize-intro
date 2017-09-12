@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <%-include partial/header%>
+  <body>
+    <%-include partial/navigation%>
+    <h1>Add Data Users</h1><br>
+    <!-- <a href="/students/">Back to Students</a><br> -->
+    <form class="form-control" action="/users/add" method="post">
+      User Name : <br>
+      <input type="text" name="username" placeholder="User Name" value="<%=data.username%>"><br>
+      Password : <br>
+      <input type="password" name="password" placeholder="Password" value="<%=data.password%>"><br>
+      Chose Role : <br>
+      <select class="" name="role">
+        <%if (data){data.forEach(rows=>{%>
+          <option value="<%=rows.role%>"><%=rows.role%></option>
+        <%})}%>
+      </select><br><br>
+      <button class="btn btn-primary" type="submit">Add Data</button>
+    </form>
+  </body>
+</html>

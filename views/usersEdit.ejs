@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%-include partial/header%>
+  </head>
+  <body>
+    <%-include partial/navigation%>
+    <h1>Edit Data Users</h1>
+    <!-- <a href="/teachers">Return to Teachers</a><br><br> -->
+    <form class="form-control" action="/users/edit/<%=data.id%>" method="post">
+      Username : <br>
+      <input type="text" name="username" value="<%=data.username%>" placeholder="Username"><br>
+      Password : <br>
+      <input type="password" name="password" value="<%=data.password%>" placeholder="Password"><br>
+      Role : <br>
+      <select name="role">
+        <%if(dataRole){dataRole.forEach(rows=>{%>
+          <%if(rows.role===data.role){%>
+            <option value="<%=rows.role%>" selected><%=rows.role%></option>
+          <%}%>
+          <option value="<%=rows.role%>"><%=rows.role%></option>
+        <%})}%>
+      </select><br><br>
+      <button class="btn btn-primary" type="submit">Edit Data</button>
+    </form>
+  </body>
+</html>
