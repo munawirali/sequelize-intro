@@ -5,14 +5,17 @@
   </head>
   <body>
     <!-- <h1>Add Student Subjects</h1> -->
-    <h1>Add Subject to Student</h1>
     <%-include partial/navigation%>
+    <h1>Add Subject to Student</h1><br>
     <!-- <a href="/students">Back to Students</a><br><br> -->
     <form class="form-control" action="/students/<%=data.id%>/addsubject" method="post">
-      First Name : <%=data.first_name%><br>
-      Last Name  : <%=data.last_name%><br>
-      Email      : <%=data.email%><br>
-      Choose Subject :
+      First Name : <br>
+      <input type="text" name="" value="<%=data.first_name%>"><br>
+      Last Name  : <br>
+      <input type="text" name="" value="<%=data.last_name%>"><br>
+      Email      : <br>
+      <input type="text" name="" value="<%=data.email%>"><br>
+      Choose Subject :<br>
       <select class="" name="SubjectId">
         <%if (dataSubject){dataSubject.forEach(rows=>{%>
           <option value="<%=rows.id%>"><%=rows.subject_name%></option>
