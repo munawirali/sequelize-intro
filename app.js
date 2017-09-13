@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
 const session = require('express-session');
-
+const flash 			= require('express-flash-notification')
+// const flash 			= require('connect-flash')
 const index=require('./routes/index');
 const login=require('./routes/login');
 const users=require('./routes/users');
@@ -21,6 +22,8 @@ app.use(session({
   saveUninitialized: true
 }))
 
+app.use(flash(app));
+
 app.use('/login',login);
 
 app.use('/',(req,res,next)=>{
@@ -33,7 +36,13 @@ app.use('/',(req,res,next)=>{
 
 app.use('/users',(req,res,next)=>{
   if (req.session.hasLogin) {
-    next();
+    if (req.session.user.role=='headmaster') {
+      next();
+    } else {
+      // req.flash("messages", "You dont have authority for this menu!" );
+      res.redirect('/');
+    }
+
   } else {
     res.redirect('/login');
   }
@@ -41,7 +50,12 @@ app.use('/users',(req,res,next)=>{
 
 app.use('/teachers',(req,res,next)=>{
   if (req.session.hasLogin) {
-    next();
+    if (req.session.user.role=='headmaster' || req.session.user.role=='teacher') {
+      next();
+    } else {
+      // req.flash("messages", { "success" : "You dont have authority for this menu!" });
+      res.redirect('/');
+    }
   }else {
     res.redirect('/login');
   }
@@ -49,7 +63,12 @@ app.use('/teachers',(req,res,next)=>{
 
 app.use('/subjects',(req,res,next)=>{
   if (req.session.hasLogin) {
-    next();
+    if (req.session.user.role=='headmaster' || req.session.user.role=='academic') {
+      next();
+    } else {
+      // req.flash("messages", { "success" : "You dont have authority for this menu!" });
+      res.redirect('/');
+    }
   }else {
     res.redirect('/login');
   }

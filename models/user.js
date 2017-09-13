@@ -1,4 +1,7 @@
 'use strict';
+const genSalt=require('../helper/saltGen');
+const createHash=require('../helper/hash');
+
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define('User', {
     username: DataTypes.STRING,
@@ -11,15 +14,24 @@ module.exports = function(sequelize, DataTypes) {
         // associations can be defined here
       }
     },
-    // hooks:{
-    //   beforeCreate:(user)=>{
-    //     let alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890',newPassword=user.password+'';
-    //     for (var i=0; i<9; i++){
-    //       newPassword+=(alphabet.charAt(Math.floor(Math.random() * alphabet.length)));
-    //     }
-    //     user.password=newPassword;
-    //   }
-    // }
+    hooks:{
+      beforeCreate:(user)=>{
+        let salt=genSalt();
+        user.salt=salt;
+        console.log('beforeCreate cuy');
+        // console.log(user.password);
+        console.log(createHash(user.password,salt));
+        user.password=createHash(user.password,salt);
+      },
+      // beforeUpdate:(user)=>{console.log(user);
+      //   let salt=genSalt();
+      //   user.salt=salt;
+      //   console.log('beforeUpdate cuy');
+      //   // console.log(user.password);
+      //   console.log(createHash(user.password,salt));
+      //   user.password=createHash(user.password,salt);
+      // }
+    }
   });
   return User;
 };

@@ -13,21 +13,10 @@ module.exports = {
       }], {});
     */
     return queryInterface.bulkInsert('Users', [{
-        username: 'johndoe',
-        password: 'foobar',
-        role: 'teacher',
-        createdAt : new Date(),
-        updatedAt : new Date()
-      },{
-        username: 'pakdengklek',
-        password: 'gogetgold',
-        role: 'academic',
-        createdAt : new Date(),
-        updatedAt : new Date()
-      },{
-        username: 'charlesxavier',
-        password: 'magnetowhy',
+        username: 'admin',
+        password: '2bd6e359724b48b5c19c8fec42e172bded8a08d9104e5f7c456aaaa00f8c521d',
         role: 'headmaster',
+        salt: 'HmnbGYz9T',
         createdAt : new Date(),
         updatedAt : new Date()
       }],
